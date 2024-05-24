@@ -111,7 +111,7 @@ export async function searchName(
                 status: 1,
                 message: "来月の予定を登録",
                 name: name,
-                month: [month2]
+                month: [month1, month2]
               };
             } else {
               return {

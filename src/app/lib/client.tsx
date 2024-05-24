@@ -442,7 +442,7 @@ export function EachMembersTable(
                 }
               }
             }
-            className="mt-1 px-1 border-b-2 border-teal-700 focus:outline-none focus:border-teal-500 transition-colors duration-300"
+            className="w-80 mt-1 px-1 border-b-2 border-teal-700 focus:outline-none focus:border-teal-500 transition-colors duration-300"
             value={ enteredComment }
             placeholder={ placeholder }
             disabled={ pending }
