@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="radio"] + label {
+  color: gray;
+  background-color: white;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+input[type="radio"]:checked + label {
+  color: white;
+  background-color: teal;
+  border-radius: 6px;
+}
