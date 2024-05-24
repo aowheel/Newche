@@ -92,7 +92,7 @@ export function Table({month, names, days, status}:{month: string; names:string[
               names.map((item1, index1) => {
                 return (
                   <tr key={index1}>
-                    <th className="sticky left-0 bg-white border border-teal-100 min-w-10">
+                    <th className="sticky left-0 bg-white border border-teal-100 min-w-10 whitespace-nowrap">
                       {item1}
                     </th>
                     {
