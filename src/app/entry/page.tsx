@@ -60,7 +60,7 @@ export default function Page()
               event.preventDefault();
               addMember(nameState.value, classState.value)
             }}
-            className="text-white bg-teal-500 rounded"
+            className="text-white bg-teal-500 rounded px-2 mx-2 mt-6"
           />
       }
     </>
