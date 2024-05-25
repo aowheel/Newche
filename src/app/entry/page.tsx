@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { nameEntry, classEntry, addMember } from "@/app/lib/server";
 import NewcheLogo from "@/app/ui/newche-logo";
@@ -11,6 +11,8 @@ export default function Page()
   const [nameState, nameDispatch] = useFormState(nameEntry, { status: false, message: "" });
 
   const [classState, classDispatch] = useFormState(classEntry,  { status: false, message: "" });
+
+  const [isLoading, setIsLoading] = useState(false);
   
   return (
     <>
@@ -58,10 +60,13 @@ export default function Page()
               <input
                 type="button"
                 value="メンバーを追加"
-                onClick={(event) => {
+                onClick={ async (event) => {
+                  setIsLoading(true);
                   event.preventDefault();
-                  addMember(nameState.value, classState.value)
+                  await addMember(nameState.value, classState.value);
+                  setIsLoading(false);
                 }}
+                disabled={ isLoading }
                 className="text-white bg-teal-500 rounded px-2 mt-10 mx-auto"
               />
           }
