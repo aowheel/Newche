@@ -87,11 +87,14 @@ export async function searchName(
       `
       const month = () => {
         const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1;
+        const year1 = currentDate.getFullYear();
+        const month1 = currentDate.getMonth() + 1;
+        const nextDate = new Date(year1, month1 + 1);
+        const year2 = nextDate.getFullYear();
+        const month2 = nextDate.getMonth() + 1;
         return [
-          `${year}-${month < 10 ? "0" : ""}${month}`,
-          `${year}-${month + 1 < 10 ? "0" : ""}${month + 1}`
+          `${year1}-${month1 < 10 ? "0" : ""}${month1}`,
+          `${year2}-${month2< 10 ? "0" : ""}${month2}`
         ];
       }
       const [month1, month2] = month();
