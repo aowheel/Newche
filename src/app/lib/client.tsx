@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { eachMembersTable, setStatus, addComment, toEachMembersTable, searchName, addMonth } from "@/app/lib/server";
@@ -470,6 +471,14 @@ export function EachMembersTable(
         }
         className="text-white bg-teal-950 px-1 rounded mt-4 transition-colors duration-300 active:bg-teal-500"
       />
+      {
+      !isEditor &&
+        <>
+          <br />
+          <Link href="/" className="block mt-2 underline text-gray-400">&gt;&gt; ホームへ</Link>
+        </>
+        
+      }
     </form>
   );
 }

@@ -61,7 +61,7 @@ export default async function Home() {
         <SelectName ids={ids} names={names} />
         <Table month={month} names={names} days={days} status={status} />
         <div id="create" className="mt-6 p-2 rounded-xl bg-teal-100 w-64">
-          <p className="text-teal-500 font-bold">自分の予定を作成して表へ追加&darr;</p>
+          <p className="text-teal-500 font-bold">&#9660;自分の予定を作成して表へ追加</p>
           <SearchName />
         </div>
       </div>
