@@ -14,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className="h-full bg-black">
-      <body className={`${notoSansJP.className} h-full bg-black`}>
+    <html lang="ja">
+      <body className={`${notoSansJP.className}`}>
         {children}
       </body>
     </html>
