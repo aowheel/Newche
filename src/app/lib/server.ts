@@ -28,7 +28,7 @@ export async function eachMembersTable(prevState: State, formData: FormData)
       } else {
         return {
           params: prevState.params,
-          error: "データがありません"
+          error: "データがありません。別の月を選択してください。"
         };
       }
     } catch(error) {

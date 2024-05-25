@@ -294,6 +294,7 @@ export function EachMembersTable(
           }
         }
       />
+      <p className="text-red-500">{ state.error }</p>
       <table className="mt-1">
         <tbody>
           {
@@ -393,7 +394,6 @@ export function EachMembersTable(
           }
         </tbody>
       </table>
-      <p className="text-red-500">{ state.error }</p>
       {
       isEditor &&
         <>
