@@ -89,7 +89,7 @@ export async function searchName(
         const currentDate = new Date();
         const year1 = currentDate.getFullYear();
         const month1 = currentDate.getMonth() + 1;
-        const nextDate = new Date(year1, month1 + 1);
+        const nextDate = new Date(year1, month1);
         const year2 = nextDate.getFullYear();
         const month2 = nextDate.getMonth() + 1;
         return [
