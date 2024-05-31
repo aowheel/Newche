@@ -16,6 +16,7 @@ export default function ScheduleStatus(
   }
 ) {
   const [pending, setPending] = useState<boolean>(false);
+  const [state, setState] = useState<number>(0);
 
   if (!curr.exist) {
     return (
@@ -56,9 +57,8 @@ export default function ScheduleStatus(
           </>
         );
       } else {
-        const [state, setState] = useState(0);
         const month = [curr.month, next.month];
-        const data =[curr.data, next.data];
+        const data = [curr.data, next.data];
         const button = ["来月の予定を表示", "今月の予定を表示"];
         return (
           <>
