@@ -29,7 +29,7 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
                       key={index}
                       onMouseEnter={() => setIsHovered(true)}
                       onMouseLeave={() => setIsHovered(false)}
-                      className="min-w-10 border border-teal-100"
+                      className="min-w-10 border border-teal-100 select-none"
                     >
                       <div className={clsx("h-10 flex items-center justify-center",{"hidden": isHovered})}>
                         <span>
@@ -39,7 +39,7 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
                       </div>
                       <div className={clsx("h-10 flex items-center justify-center",{"hidden": !isHovered})}>
                         <span className="leading-none text-xs text-gray-500">
-                          {item[1]}<br />&#x23F7;<br />{item[2]}
+                          {item[1]}<br />&#9662;<br />{item[2]}
                         </span>
                       </div>
                     </th>
