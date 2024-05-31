@@ -6,8 +6,8 @@ const orbitron = Orbitron({
 
 export default function NewcheLogo() {
   return (
-    <div className="mx-2">
-      <p className={`${orbitron.className} text-4xl text-teal-500`}>Newche</p>
+    <div className={`${orbitron.className} mx-2 text-4xl text-teal-500 inline-block`}>
+      Newche
     </div>
   );
 }

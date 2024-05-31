@@ -1,59 +1,38 @@
-import { sql } from "@vercel/postgres";
-import Link from "next/link";
-import { EachMembersTable } from "@/app/lib/client";
-import { Day } from "@/app/lib/definition";
-import NewcheLogo from "@/app/ui/newche-logo";
+import NewcheLogo from "@/ui/newche-logo";
+import { membersName, schedule } from "@/lib/data";
+import ScheduleStatus from "@/components/schedule-status";
 
-export default async function Page({ params }: { params: { id: number } })
+export default async function Page({params}: {params: {id: number}})
 {
-  const fetchMembersName = async (membersId: number) =>
-  {
-    try {
-      const data = await sql<{ name: string }>`
-        SELECT name FROM members
-        WHERE id = ${membersId};
-      `;
-      const member = data.rows[0];
-      const trimedName = member.name.trim();
-      return trimedName;
-    } catch(error) {
-      console.error("Database Error:", error);
-      throw new Error("Failed to fetch members data.");
-    }
-  }
-  const membersName = await fetchMembersName(params.id);
-  
-  const currentMonth = () => {
+  const name = membersName(params.id);
+
+  const month = () => {
     const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    return `${year}-${month < 10 ? "0" : ""}${month}`;
+    const year1 = currentDate.getFullYear();
+    const month1 = currentDate.getMonth() + 1;
+    const nextDate = new Date(year1, month1);
+    const year2 = nextDate.getFullYear();
+    const month2 = nextDate.getMonth() + 1;
+    return {
+      curr: `${year1}-${month1 < 10 ? "0" : ""}${month1}`,
+      next: `${year2}-${month2< 10 ? "0" : ""}${month2}`
+    };
+  }
+  const curr = month().curr;
+  const next = month().next;
+  
+  const currStatus = await schedule(params.id, curr);
+  const nextStatus = await schedule(params.id, next);
+  
+  if(currStatus === undefined) {
+    return undefined;
   }
 
-  const fetchCurrentSchedule = async (membersId: number) =>
-  {
-    try {
-      const data = await sql<{ [key: string]: Day[] | null }>`
-        SELECT schedule->${currentMonth()}
-        AS month
-        FROM members
-        WHERE id = ${membersId};
-      `;
-      return data.rows[0].month;
-    } catch(error) {
-      console.error("Database Error:", error);
-      throw new Error("Failed to fetch members data.");
-    }
-  }
-  const currentSchedule = await fetchCurrentSchedule(params.id);
-  
   return (
     <main>
-      <Link href="/"><NewcheLogo /></Link>
-      <p className="px-2 text-xs text-gray-400">&gt;&gt; <label className="text-base">{membersName}</label>さんのページ</p>
-      <EachMembersTable
-        membersId={ params.id } currentMonth={ currentMonth() } currentSchedule={ currentSchedule }
-      />
+      <NewcheLogo />
+      <p className="px-2 text-xs text-gray-400 inline-block">&#9733;&ensp;<label className="text-base">{name}</label>&ensp;さんのページ</p>
+      <ScheduleStatus id={params.id} curr={currStatus} next={nextStatus} />
     </main>
   );
 }
