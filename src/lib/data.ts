@@ -39,7 +39,7 @@ export async function filteredMembers(
 }
 
 export async function schedule(id: number, month: string) {
-  const data: OverallData = {ids: [], names: [], days: [], status: []};
+  const data: OverallData = {ids: [], names: [], days: [], status: [], overallComment: [], individualComment: []};
 
   try {
     const templateData = await sql<{days: ScheduleTemplate[]}>`
@@ -47,6 +47,7 @@ export async function schedule(id: number, month: string) {
       FROM schedule
       WHERE month = ${month};
     `;
+    
     if (templateData.rows[0] !== undefined) {
       const column = templateData.rows[0].days;
       const eachMembersData = await sql<{month: Schedule[]}>`
@@ -54,15 +55,24 @@ export async function schedule(id: number, month: string) {
         FROM members
         WHERE id=${id} AND schedule::jsonb ? ${month};
       `;
+
       if (eachMembersData.rows[0] !== undefined) {
-        const overallData = await sql<{id: number, name: string, month: Schedule[]}>`
+        for (let i = 0; i < column.length; i++) {
+          const day = column[i].day;
+          const comment = column[i].comment;
+          if (comment !== null) {
+            data.overallComment.push([day, comment]);
+          }
+        }
+
+        const individualData = await sql<{id: number, name: string, month: Schedule[]}>`
           SELECT
           id, name, schedule->${month} AS month
           FROM members
           WHERE schedule::jsonb ? ${month};
         `;
-        const row = overallData.rows;
-
+        const row = individualData.rows;
+        
         for (let i = 0; i < row.length; i++) {
           data.ids.push(row[i].id);
           data.names.push(row[i].name);
@@ -75,6 +85,10 @@ export async function schedule(id: number, month: string) {
           const eachMembersStatus: number[] = [];
           for (let l = 0; l < column.length; l++) {
             eachMembersStatus.push(row[k].month[l].status);
+            const comment = row[k].month[l].comment
+            if (comment !== null) {
+              data.individualComment.push([row[k].name, row[k].month[l].day, comment]);
+            }
           }
           data.status.push(eachMembersStatus);
         }

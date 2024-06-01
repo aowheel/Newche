@@ -17,5 +17,7 @@ export type OverallData = {
   ids: number[],
   names: string[],
   days: string[][],
-  status: number[][]
+  status: number[][],
+  overallComment: string[][],
+  individualComment: string[][]
 }
