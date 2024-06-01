@@ -83,8 +83,8 @@ export default function IndividualSchedule(
             className="px-2 w-24 rounded border-2 border-teal-700 focus:border-teal-500 transition-colors duration-300"
             onChange={(event) => {
               const index = parseInt(event.target.value, 10);
-              setDay(data[index]?.day);
-              setComment(data[index]?.comment);
+              setDay(data[index] === undefined ? "" : data[index].day);
+              setComment(data[index] === undefined ? "" : data[index].comment);
             }}
           >
             <option value={9999} className="text-gray-400">日にち</option>
@@ -104,6 +104,7 @@ export default function IndividualSchedule(
             defaultValue={comment === null ? "" : comment}
             onChange={
               (event) => {
+                /* 要検討 */
                 setComment(event.target.value);
               }
             }

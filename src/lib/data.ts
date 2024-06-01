@@ -93,10 +93,12 @@ export async function schedule(id: number, month: string) {
 
 export async function membersName(id: number) {
   try {
-    const data = await sql<{name: string | undefined}>`
+    const data = await sql<{name: string}>`
       SELECT name FROM members WHERE id=${id};
     `;
-    return data.rows[0].name;
+    if(data.rows[0] !== undefined) {
+      return data.rows[0].name;
+    }
   } catch(error) {
     throw error;
   }
@@ -104,12 +106,14 @@ export async function membersName(id: number) {
 
 export async function individualData(id: number, month: string) {
   try {
-    const data = await sql<{month: Schedule[] | undefined}>`
+    const data = await sql<{month: Schedule[]}>`
       SELECT schedule->${month} AS month
       FROM members
       WHERE id=${id} AND schedule::jsonb ? ${month};
     `;
-    return data.rows[0].month;
+    if (data.rows[0] !== undefined) {
+      return data.rows[0].month;
+    }
   } catch(error) {
     throw error;
   }
