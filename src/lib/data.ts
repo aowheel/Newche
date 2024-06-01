@@ -86,7 +86,7 @@ export async function schedule(id: number, month: string) {
           for (let l = 0; l < column.length; l++) {
             eachMembersStatus.push(row[k].month[l].status);
             const comment = row[k].month[l].comment
-            if (comment !== null) {
+            if (comment !== null && comment !== "") {
               data.individualComment.push([row[k].name, row[k].month[l].day, comment]);
             }
           }

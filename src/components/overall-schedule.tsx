@@ -29,7 +29,7 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
                 <th className="sticky left-0 bg-white border border-teal-100 text-3xl text-teal-200">
                   <div className="h-10 flex items-center justify-center">
                     <span>
-                      {`${parseInt(month.split("-")[1], 10)}`}
+                      {parseInt(month.split("-")[1], 10)}
                     </span>
                   </div>
                 </th>
@@ -44,8 +44,8 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
                       >
                         <div className={clsx("h-10 flex items-center justify-center",{"hidden": isHovered})}>
                           <span>
-                            <span className="text-xl">{parseInt(item[0], 10)}</span>
-                            <span className="text-xs">{week(`${month}-${item[0]}`)}</span>
+                            <span className="text-xl">{item[0]}</span>
+                            <span className="text-xs">{week(`${month}-${parseInt(item[0], 10) < 10 ? "0" : ""}${item[0]}`)}</span>
                           </span>
                         </div>
                         <div className={clsx("h-10 flex items-center justify-center",{"hidden": !isHovered})}>

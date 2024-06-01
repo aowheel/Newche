@@ -15,7 +15,7 @@ export default async function Page({params}: {params: {id: number}})
     const month2 = nextDate.getMonth() + 1;
     return {
       curr: `${year1}-${month1 < 10 ? "0" : ""}${month1}`,
-      next: `${year2}-${month2< 10 ? "0" : ""}${month2}`
+      next: `${year2}-${month2 < 10 ? "0" : ""}${month2}`
     };
   }
   const curr = month().curr;

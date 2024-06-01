@@ -10,7 +10,7 @@ export default function IndividualSchedule(
   {id, month, data}: {id: number, month: string, data: Schedule[]}
 ) {
   const [day, setDay] = useState<string>("");
-  const [comment, setComment] = useState<string | null>("");
+  const [comment, setComment] = useState<string>("");
   const [pending, setPending] = useState<boolean>(false);
 
   return (
@@ -84,10 +84,9 @@ export default function IndividualSchedule(
             onChange={(event) => {
               const index = parseInt(event.target.value, 10);
               setDay(data[index] === undefined ? "" : data[index].day);
-              setComment(data[index] === undefined ? "" : data[index].comment);
             }}
           >
-            <option value={9999} className="text-gray-400">日にち</option>
+            <option value={-1} className="text-gray-400">日にち</option>
             {
               data.map((item, index) => {
                 return (
@@ -101,7 +100,7 @@ export default function IndividualSchedule(
           <input
             type="text"
             name="comment"
-            defaultValue={comment === null ? "" : comment}
+            value={comment === null ? "" : comment}
             onChange={
               (event) => {
                 /* 要検討 */
