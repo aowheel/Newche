@@ -27,7 +27,7 @@ export async function editStatus(id: number, month: string, day: string, status:
   revalidatePath(`/${id}/${month}`);
 }
 
-export async function editComment(id: number, month: string, day?: string, comment?: string | null)
+export async function editComment(id: number, month: string, day: string, comment: string)
 {
   try {
     await sql`

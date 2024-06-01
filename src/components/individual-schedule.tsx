@@ -101,7 +101,7 @@ export default function IndividualSchedule(
           <input
             type="text"
             name="comment"
-            defaultValue={comment === null ? undefined : comment}
+            defaultValue={comment === null ? "" : comment}
             onChange={
               (event) => {
                 setComment(event.target.value);
@@ -118,7 +118,9 @@ export default function IndividualSchedule(
             value={comment !== "" ? "送信" : "削除"}
             onClick={async () => {
               setPending(true);
-              await editComment(id, month, day, comment);
+              if (comment !== null) {
+                await editComment(id, month, day, comment);
+              }
               setPending(false);
             }}
             className={clsx("px-2 rounded text-white transition-colors duration-300", {
