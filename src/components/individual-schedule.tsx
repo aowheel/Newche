@@ -23,7 +23,7 @@ export default function IndividualSchedule(
                 return (
                   <tr key={ index }>
                     <th className="px-1 py-2 border border-teal-300 whitespace-nowrap">
-                      { parseInt(item.day, 10) }&ensp;({ week(`${month}-${item.day}`) })&ensp;{ item.start }-{ item.end }
+                      { parseInt(item.day, 10) }&ensp;({ week(`${month}-${parseInt(item.day, 10) < 10 ? "0" : ""}${item.day}`) })&ensp;{ item.start }-{ item.end }
                     </th>
                     <td className="border border-teal-300">
                       <div className="flex px-1">
