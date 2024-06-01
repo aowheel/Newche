@@ -12,6 +12,8 @@ export async function insertMonth(id: number, month: string) {
   } catch(error) {
     throw error;
   }
+  revalidatePath(`/${id}`);
+  revalidatePath(`/${id}/${month}`);
 }
 
 export async function editStatus(id: number, month: string, day: string, status: number)

@@ -1,7 +1,6 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { cookies } from "next/headers";
 import { z } from "zod";
 import { OverallData, Schedule, ScheduleTemplate } from "./definitions";
 
