@@ -4,10 +4,12 @@ import Link from "next/link";
 import NewcheLogo from "@/ui/newche-logo"; 
 import SelectMember from "@/components/select-member";
 import { members } from "@/lib/data";
+import { revalidatePath } from "next/cache";
 
 export default async function Entry() {
   const cookieStore = cookies();
   if (cookieStore.has("id")) {
+    revalidatePath(`/${cookieStore.get("id")?.value}`);
     redirect(`/${cookieStore.get("id")?.value}`);
   } else {
     const names = await members();
