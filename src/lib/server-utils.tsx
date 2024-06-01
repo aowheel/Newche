@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 
 export async function transition1(id: string) {
   cookies().set("id", id);
+  revalidatePath(`/${id}`);
   redirect(`/${id}`);
 }
 
