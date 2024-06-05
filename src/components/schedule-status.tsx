@@ -53,7 +53,7 @@ export default function ScheduleStatus(
               disabled={pending}
             />
             <OverallSchedule month={curr.month} data={curr.data} />
-            <Link href={`${id}/${curr.month}`} className="block mx-4 my-2 text-lg text-teal-400 underline">&#9658;今月の日程を編集</Link>
+            <Link href={`${id}/${curr.month}`} className="inline-block mx-4 my-2 text-lg text-teal-400 underline">&#9658;今月の日程を編集</Link>
           </>
         );
       } else {
@@ -71,8 +71,8 @@ export default function ScheduleStatus(
               className="px-1 m-2 text-white bg-teal-400 rounded"
             />
             <OverallSchedule month={month[state]} data={data[state]} />
-            <Link href={`${id}/${curr.month}`} className="block mx-4 my-2 text-lg text-teal-400 underline">&#9658;今月の日程を編集</Link>
-            <Link href={`${id}/${next.month}`} className="block mx-4 my-2 text-lg text-teal-400 underline">#9658;来月の日程を編集</Link>
+            <Link href={`${id}/${curr.month}`} className="inline-block mx-4 my-2 text-lg text-teal-400 underline">&#9658;今月の日程を編集</Link>
+            <Link href={`${id}/${next.month}`} className="inline-block mx-4 my-2 text-lg text-teal-400 underline">#9658;来月の日程を編集</Link>
           </>
         );
       }
@@ -80,7 +80,7 @@ export default function ScheduleStatus(
       return (
         <>
           <OverallSchedule month={curr.month} data={curr.data} />
-          <Link href={`${id}/${curr.month}`} className="block mx-4 my-2 text-lg text-teal-400 underline">&#9658;今月の日程を編集</Link>
+          <Link href={`${id}/${curr.month}`} className="inline-block mx-4 my-2 text-lg text-teal-400 underline">&#9658;今月の日程を編集</Link>
         </>
       );
     }

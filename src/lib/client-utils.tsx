@@ -97,7 +97,7 @@ export function classEntry(
 
 export function DeleteCookies() {
   return (
-    <div className="flex justify-center mx-4 my-6">
+    <div className="flex justify-center pt-2 pd-4 py-6">
       <input
         type="button"
         onClick={async () => {await transition3()}}
