@@ -23,7 +23,6 @@ export default function SelectMember({ names }: { names: string[][]}) {
               event.currentTarget.form?.requestSubmit();
             }}
             className="border rounded w-24 px-2"
-            autoFocus
           />
           <p className="text-xs text-red-600">{ state?.message }</p>
         </form>

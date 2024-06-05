@@ -132,6 +132,9 @@ export async function individualData(id: number, month: string) {
   }
 }
 
+/*直近のデータを取得する関数 今後作成*/
+export async function twoDaysData(curr: {month: string, day:number}, next: {month: string, day:number}) {}
+
 /*要検討*/
 export async function nameEntry(
   prevState: { status: boolean, message: string, value?: string },

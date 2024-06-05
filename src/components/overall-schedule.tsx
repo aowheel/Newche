@@ -7,8 +7,6 @@ import { useState } from "react";
 
 export default function OverallSchedule({month, data}: {month: string, data: OverallData})
 {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <>
       <div>
@@ -26,7 +24,7 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
           <table className="min-w-full">
             <thead>
               <tr>
-                <th className="sticky left-0 bg-white border border-teal-100 text-3xl text-teal-200">
+                <th rowSpan={2} className="sticky left-0 bg-white border border-teal-100 text-4xl text-teal-300">
                   <div className="h-10 flex items-center justify-center">
                     <span>
                       {parseInt(month.split("-")[1], 10)}
@@ -38,17 +36,28 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
                     return (
                       <th
                         key={index}
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
                         className="min-w-10 border border-teal-100 select-none"
                       >
-                        <div className={clsx("h-10 flex items-center justify-center",{"hidden": isHovered})}>
+                        <div className="h-10 flex items-center justify-center">
                           <span>
                             <span className="text-xl">{item[0]}</span>
                             <span className="text-xs">{week(`${month}-${parseInt(item[0], 10) < 10 ? "0" : ""}${item[0]}`)}</span>
                           </span>
                         </div>
-                        <div className={clsx("h-10 flex items-center justify-center",{"hidden": !isHovered})}>
+                      </th>
+                    );
+                  })
+                }
+              </tr>
+              <tr>
+                {
+                  data.days.map((item, index) => {
+                    return (
+                      <th
+                        key={index}
+                        className="min-w-10 border border-teal-100 select-none"
+                      >
+                        <div className="h-10 flex items-center justify-center">
                           <span className="leading-none text-xs text-gray-500">
                             {item[1]}<br />&#9662;<br />{item[2]}
                           </span>
@@ -103,7 +112,7 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
             <div key={index} className="mx-4 mt-2 px-2 py-1 rounded bg-gray-100">
               <span className="mr-2 px-2 rounded text-sm text-white bg-gray-400">{item[0].split(" ").join("")}</span>
               <span>{item[1]}</span>
-              <span className="">:&ensp;{item[2]}</span>
+              <span className="">&#9656;&ensp;{item[2]}</span>
             </div>
           );
         })}

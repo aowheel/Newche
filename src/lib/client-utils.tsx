@@ -1,5 +1,7 @@
 "use client";
 
+import { transition3 } from "./server-utils";
+
 export function week(dateString: string) {
   const daysOfWeek = ["日","月","火","水","木","金","土"];
   const date = new Date(dateString);
@@ -91,4 +93,17 @@ export function classEntry(
       status: false, message: "期の条件を満たしていません。"
     };
   }
+}
+
+export function DeleteCookies() {
+  return (
+    <div className="flex justify-center mx-4 my-6">
+      <input
+        type="button"
+        onClick={async () => {await transition3()}}
+        value="別の名前を選択"
+        className="text-white bg-gray-300 rounded-full px-2"
+      />
+    </div>
+  );
 }
