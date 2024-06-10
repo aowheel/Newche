@@ -52,7 +52,7 @@ export default function ScheduleStatus(
             />
             <OverallSchedule month={curr.month} data={curr.data} />
             <div className="px-4 pb-4">
-              <Link href={`${id}/${curr.month}`} className="inline-block px-2 text-lg text-teal-200 bg-black rounded">今月の日程を編集</Link>
+              <Link href={`${id}/${curr.month}`} className="inline-block px-2 text-lg text-teal-400 border border-teal-400 rounded">今月の日程を編集</Link>
             </div>
           </>
         );
@@ -72,8 +72,8 @@ export default function ScheduleStatus(
             />
             <OverallSchedule month={month[state]} data={data[state]} />
             <div className="px-4 pb-4">
-              <Link href={`${id}/${curr.month}`} className="inline-block mr-4 px-2 text-lg text-teal-200 bg-black rounded">今月の日程を編集</Link>
-              <Link href={`${id}/${next.month}`} className="inline-block px-2 text-lg text-teal-200 bg-black rounded">来月の日程を編集</Link>
+              <Link href={`${id}/${curr.month}`} className="inline-block mr-4 px-2 text-lg text-teal-400 border border-teal-400 rounded">今月の日程を編集</Link>
+              <Link href={`${id}/${next.month}`} className="inline-block px-2 text-lg text-teal-400 border border-teal-400 rounded">来月の日程を編集</Link>
             </div>
           </>
         );
@@ -83,7 +83,7 @@ export default function ScheduleStatus(
         <>
           <OverallSchedule month={curr.month} data={curr.data} />
           <div className="px-4 pb-4">
-            <Link href={`${id}/${curr.month}`} className="inline-block px-2 text-lg text-teal-200 bg-black rounded">今月の日程を編集</Link>
+            <Link href={`${id}/${curr.month}`} className="inline-block px-2 text-lg text-teal-400 border border-teal-400 rounded">今月の日程を編集</Link>
           </div>
         </>
       );
