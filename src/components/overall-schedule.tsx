@@ -8,18 +8,16 @@ import { useState } from "react";
 export default function OverallSchedule({month, data}: {month: string, data: OverallData})
 {
   return (
-    <>
-      <div>
-        {data.overallComment.map((item, index) => {
-          return (
-            <div key={index} className="mx-4 mt-2 px-2 py-1 rounded bg-teal-100">
-              <span className="px-2 mr-2 rounded-full text-white bg-teal-700 font-bold">{item[0]}</span>
-              <span className="font-semibold">{item[1]}</span>
-            </div>
-          );
-        })}
-      </div>
-      <div className="m-2">
+    <div className="px-2 py-4">
+      {data.overallComment.map((item, index) => {
+        return (
+          <div key={index} className="mx-2 px-2 py-1 rounded bg-teal-100">
+            <span className="px-2 mr-2 rounded-full text-white bg-teal-700 font-bold">{item[0]}</span>
+            <span className="font-semibold">{item[1]}</span>
+          </div>
+        );
+      })}
+      <div className="mt-2">
         <div className="overflow-x-auto relative">
           <table className="min-w-full">
             <thead>
@@ -109,14 +107,14 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
       <div>
         {data.individualComment.map((item, index) => {
           return (
-            <div key={index} className="mx-4 mt-2 px-2 py-1 rounded bg-gray-100">
-              <span className="mr-2 px-2 rounded text-sm text-white bg-gray-400">{item[0].split(" ").join("")}</span>
-              <span>{item[1]}</span>
-              <span className="">&#9656;&ensp;{item[2]}</span>
+            <div key={index} className="mx-2 mt-2 px-2 py-1 rounded bg-gray-100">
+              <span className="mr-2 px-2 rounded text-sm text-white bg-gray-400">{item[0].trim()}</span>
+              <span>{item[1]}&#9656;&ensp;</span>
+              <span>{item[2]}</span>
             </div>
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

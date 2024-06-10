@@ -94,16 +94,3 @@ export function classEntry(
     };
   }
 }
-
-export function DeleteCookies() {
-  return (
-    <div className="flex justify-center pt-2 pd-4 py-6">
-      <input
-        type="button"
-        onClick={async () => {await transition3()}}
-        value="別の名前を選択"
-        className="text-white bg-gray-300 rounded-full px-2"
-      />
-    </div>
-  );
-}

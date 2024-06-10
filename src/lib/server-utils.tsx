@@ -17,7 +17,7 @@ export async function transition2(id: number, month: string) {
 
 export async function transition3() {
   cookies().delete("id");
-  redirect('/entry');
+  redirect("/entry");
 }
 
 export async function month() {

@@ -3,6 +3,7 @@
 import { sql } from "@vercel/postgres";
 import { z } from "zod";
 import { OverallData, Schedule, ScheduleTemplate } from "./definitions";
+import { Rowdies } from "next/font/google";
 
 export async function members() {
   try {
@@ -75,7 +76,7 @@ export async function schedule(id: number, month: string) {
         
         for (let i = 0; i < row.length; i++) {
           data.ids.push(row[i].id);
-          data.names.push(row[i].name);
+          data.names.push(row[i].name.trim());
         }
         for (let i = 0; i < column.length; i++) {
           const month = column[i];
@@ -110,7 +111,8 @@ export async function membersName(id: number) {
       SELECT name FROM members WHERE id=${id};
     `;
     if(data.rows[0] !== undefined) {
-      return data.rows[0].name;
+      const name = data.rows[0].name.trim();
+      return name;
     }
   } catch(error) {
     throw error;
@@ -132,10 +134,58 @@ export async function individualData(id: number, month: string) {
   }
 }
 
-/*直近のデータを取得する関数 今後作成*/
-export async function twoDaysData(curr: {month: string, day:number}, next: {month: string, day:number}) {}
+export async function dayData(date: {month: string, day:number}) {
+  try {
+    const data = await sql<{start: string, end: string}>`
+      SELECT element->>'start' AS start, element->>'end' AS end
+      FROM schedule, jsonb_array_elements(days) AS element
+      WHERE month = ${date.month} AND element->>'day' = ${date.day};
+    `;
+    const dayData = data.rows[0];
+    if (data.rows[0] === undefined) {
+      return undefined;
+    } else {
+      const day = `${parseInt(date.month.split("-")[1], 10)}/${date.day}`;
+      const participants:{class: number, name: string[]}[] = [];
+      const comments:{name: string, comment: string}[] = [];
 
-/*要検討*/
+      const data = await sql<{name: string, class: number, status: string, comment: string}>`
+        SELECT name, class, element->>'status' AS status, element->>'comment' AS comment
+        FROM members, jsonb_array_elements(schedule->${date.month}) AS element
+        WHERE element->>'day' = ${date.day};
+      `;
+      for (let i = 0; i < data.rows.length; i++) {
+        const eachData = data.rows[i];
+        if (eachData.status === "0") {
+          let added = false;
+          for (let j = 0; j < participants.length; j++) {
+            if (participants[j].class === eachData.class) {
+              participants[j].name.push(eachData.name.trim());
+              added = true;
+            }
+          }
+          if (!added) {
+            participants.push({class: eachData.class, name: [eachData.name.trim()]});
+          }
+        }
+        if (eachData.comment !== null && eachData.comment !== "") {
+          comments.push({ name: eachData.name.trim(), comment: eachData.comment });
+        }
+      }
+      return {
+        day: day,
+        start: dayData.start,
+        end: dayData.end,
+        participants: participants,
+        comments: comments
+      };
+    }
+  } catch(error) {
+    throw error;
+  }
+}
+
+//要検討
 export async function nameEntry(
   prevState: { status: boolean, message: string, value?: string },
   formData: FormData

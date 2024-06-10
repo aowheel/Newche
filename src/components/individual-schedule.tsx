@@ -80,13 +80,13 @@ export default function IndividualSchedule(
         <div>
           <select
             name="day"
-            className="px-2 w-24 rounded border-2 border-teal-700 focus:border-teal-500 transition-colors duration-300"
+            className="px-1 text-teal-800 font-semibold rounded border-2 border-teal-700 focus:border-teal-500 transition-colors duration-300"
             onChange={(event) => {
               const index = parseInt(event.target.value, 10);
               setDay(data[index] === undefined ? "" : data[index].day);
             }}
           >
-            <option value={-1} className="text-gray-400">日にち</option>
+            <option value={-1}>日付を選択</option>
             {
               data.map((item, index) => {
                 return (
@@ -112,24 +112,28 @@ export default function IndividualSchedule(
             disabled={pending}
           />
         </div>
-        <div className="mt-2">
-          <input
-            type="button"
-            value={comment !== "" ? "送信" : "削除"}
-            onClick={async () => {
-              setPending(true);
-              if (comment !== null) {
-                await editComment(id, month, day, comment);
-              }
-              setPending(false);
-            }}
-            className={clsx("px-2 rounded text-white transition-colors duration-300", {
-              "bg-teal-400 focus:bg-teal-300": comment !== "",
-              "bg-red-600 focus:bg-red-400": comment === ""
-            })}
-            disabled={pending}
-          />
-        </div>
+        {
+          day !== "" &&
+          <div className="mt-2">
+            <input
+              type="button"
+              value={comment !== "" ? "送信" : "削除"}
+              onClick={async () => {
+                setPending(true);
+                if (comment !== null) {
+                  await editComment(id, month, day, comment);
+                }
+                setPending(false);
+              }}
+              className={clsx("px-2 rounded text-white transition-colors duration-300", {
+                "bg-teal-400 focus:bg-teal-300": comment !== "",
+                "bg-red-600 focus:bg-red-400": comment === ""
+              })}
+              disabled={pending}
+            />
+          </div>
+        }
+        
       </div>
     </>
   );
