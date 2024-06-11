@@ -26,7 +26,7 @@ export default function RecentDetails(
             {data.participants.map((item1, index1) => {
               return (
                 <tr key={index1} className="whitespace-nowrap">
-                  <th>{item1.class}期&ensp;&gt;</th>
+                  <th className="px-2">{item1.class}期&ensp;&gt;</th>
                   {item1.name.map((item2, index2) => {
                     return (
                       <td key={index2} className="px-2">{item2}</td>
