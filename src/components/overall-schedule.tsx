@@ -11,7 +11,7 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
     <div className="px-2 py-4">
       {data.overallComment.map((item, index) => {
         return (
-          <div key={index} className="mx-2 px-2 py-1 rounded bg-teal-100">
+          <div key={index} className="mx-2 my-1 px-2 py-1 rounded bg-teal-100">
             <span className="px-2 mr-2 rounded-full text-white bg-teal-700 font-bold">{item[0]}</span>
             <span className="font-semibold">{item[1]}</span>
           </div>
