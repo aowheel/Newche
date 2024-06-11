@@ -1,7 +1,6 @@
 import IndividualSchedule from "@/components/individual-schedule";
 import { individualData, membersName } from "@/lib/data";
 import NewcheLogo from "@/ui/newche-logo";
-import Link from "next/link";
 
 export default async function Page({params}: {params:{id: number, month: string}})
 {
@@ -16,9 +15,6 @@ export default async function Page({params}: {params:{id: number, month: string}
     <>
       <NewcheLogo name={name} />
       <IndividualSchedule id={params.id} month={params.month} data={data} />
-      <div className="flex justify-center mb-4">
-        <Link href={`/${params.id}`} className="text-gray-400 underline">一覧へ戻る</Link>
-      </div>
     </>
   );
 }

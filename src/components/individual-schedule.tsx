@@ -4,6 +4,7 @@ import { editComment, editStatus } from "@/lib/actions";
 import { statusSymbol2, week } from "@/lib/client-utils";
 import { Schedule } from "@/lib/definitions";
 import clsx from "clsx";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function IndividualSchedule(
@@ -12,7 +13,12 @@ export default function IndividualSchedule(
   const [day, setDay] = useState<string>("");
   const [comment, setComment] = useState<string>("");
   const [pending, setPending] = useState<boolean>(false);
-
+  let allChecked = true;
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].status === 9999) {
+      allChecked = false;
+    }
+  }
   return (
     <>
       <div className="overflow-x-auto">
@@ -39,7 +45,7 @@ export default function IndividualSchedule(
                             }
                           }
                         />
-                        <label htmlFor={ `option${index}-0` }>{statusSymbol2(0)}</label>
+                        <label htmlFor={ `option${index}-0` } className="mx-1">{statusSymbol2(0)}</label>
                         <input
                           type="radio"
                           id={ `option${index}-1` }
@@ -52,7 +58,7 @@ export default function IndividualSchedule(
                             }
                           }
                         />
-                        <label htmlFor={ `option${index}-1` }>{statusSymbol2(1)}</label>
+                        <label htmlFor={ `option${index}-1` } className="mx-1">{statusSymbol2(1)}</label>
                         <input
                           type="radio"
                           id={ `option${index}-2` }
@@ -65,7 +71,14 @@ export default function IndividualSchedule(
                             }
                           }
                         />
-                        <label htmlFor={ `option${index}-2` }>{statusSymbol2(2)}</label>
+                        <label htmlFor={ `option${index}-2` } className="mx-1">{statusSymbol2(2)}</label>
+                        {
+                          item.status === 9999 &&
+                          <span className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-full w-full bg-teal-300"></span>
+                          </span>
+                        }
                       </div>
                     </td>
                     <td className="border px-1 border-teal-300">{item.comment}</td>
@@ -103,7 +116,6 @@ export default function IndividualSchedule(
             value={comment === null ? "" : comment}
             onChange={
               (event) => {
-                /* 要検討 */
                 setComment(event.target.value);
               }
             }
@@ -134,6 +146,12 @@ export default function IndividualSchedule(
           </div>
         }
       </div>
+      {
+        allChecked &&
+        <div className="flex justify-center mb-4">
+          <Link href={`/${id}`} className="px-2 text-teal-400 border border-teal-400 rounded">一覧へ戻る</Link>
+        </div>
+      }
     </>
   );
 }
