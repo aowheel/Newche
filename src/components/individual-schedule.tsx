@@ -133,7 +133,6 @@ export default function IndividualSchedule(
             />
           </div>
         }
-        
       </div>
     </>
   );

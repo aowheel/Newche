@@ -108,8 +108,8 @@ export default function OverallSchedule({month, data}: {month: string, data: Ove
         {data.individualComment.map((item, index) => {
           return (
             <div key={index} className="mx-2 mt-2 px-2 py-1 rounded bg-gray-100">
-              <span className="mr-2 px-2 rounded text-sm text-white bg-gray-400">{item[0].trim()}</span>
-              <span>{item[1]}&#9656;&ensp;</span>
+              <span className="mr-2 px-1 rounded text-sm text-white bg-gray-400">{item[0].trim()}</span>
+              <span>{item[1]}&ensp;&gt;&ensp;</span>
               <span>{item[2]}</span>
             </div>
           );

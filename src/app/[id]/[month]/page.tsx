@@ -16,7 +16,7 @@ export default async function Page({params}: {params:{id: number, month: string}
     <>
       <NewcheLogo name={name} />
       <IndividualSchedule id={params.id} month={params.month} data={data} />
-      <Link href={`/${params.id}`} className="block mb-4 text-gray-400 text-center underline">&#9658;一覧へ戻る</Link>
+      <Link href={`/${params.id}`} className="block mb-4 text-gray-400 text-center underline">一覧へ戻る</Link>
     </>
   );
 }
