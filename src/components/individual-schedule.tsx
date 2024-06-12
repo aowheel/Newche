@@ -32,7 +32,7 @@ export default function IndividualSchedule(
                       { parseInt(item.day, 10) }&ensp;({ week(`${month}-${parseInt(item.day, 10) < 10 ? "0" : ""}${item.day}`) })&ensp;{ item.start }-{ item.end }
                     </th>
                     <td className="border border-teal-300">
-                      <div className="flex px-1">
+                      <div className="relative flex px-1">
                         <input
                           type="radio"
                           id={ `option${index}-0` }
@@ -74,10 +74,10 @@ export default function IndividualSchedule(
                         <label htmlFor={ `option${index}-2` } className="mx-1">{statusSymbol2(2)}</label>
                         {
                           item.status === 9999 &&
-                          <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-full w-full bg-teal-300"></span>
-                          </span>
+                          <>
+                            <span className="animate-ping absolute top-0 -left-1 h-3 w-3 rounded-full bg-teal-300 opacity-75"></span>
+                            <span className="absolute top-0 -left-1 rounded-full border border-white h-3 w-3 bg-teal-200"></span>
+                          </>
                         }
                       </div>
                     </td>
