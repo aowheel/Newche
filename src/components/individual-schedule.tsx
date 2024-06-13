@@ -89,6 +89,11 @@ export default function IndividualSchedule(
           </tbody>
         </table>
       </div>
+      <div className="flex justify-between mx-4 mb-4">
+        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(0)}<span>&ensp;参加</span></span>
+        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(1)}<span>&ensp;不参加</span></span>
+        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(2)}<span>&ensp;未定</span></span>
+      </div>
       <div className="mb-4 mx-4 p-4 border border-teal-300 rounded">
         <div>
           <select

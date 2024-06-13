@@ -40,7 +40,7 @@ export async function filteredMembers(
 }
 
 export async function schedule(id: number, month: string) {
-  const data: OverallData = {ids: [], names: [], days: [], status: [], overallComment: [], individualComment: []};
+  const data: OverallData = {ids: [], names: [], classes: [], days: [], status: [], overallComment: [], individualComment: []};
 
   try {
     const templateData = await sql<{days: ScheduleTemplate[]}>`
@@ -66,9 +66,9 @@ export async function schedule(id: number, month: string) {
           }
         }
 
-        const individualData = await sql<{id: number, name: string, month: Schedule[]}>`
+        const individualData = await sql<{id: number, name: string, class: number, month: Schedule[]}>`
           SELECT
-          id, name, schedule->${month} AS month
+          id, name, class, schedule->${month} AS month
           FROM members
           WHERE schedule::jsonb ? ${month};
         `;
@@ -77,6 +77,7 @@ export async function schedule(id: number, month: string) {
         for (let i = 0; i < row.length; i++) {
           data.ids.push(row[i].id);
           data.names.push(row[i].name.trim());
+          data.classes.push(row[i].class);
         }
         for (let i = 0; i < column.length; i++) {
           const month = column[i];
@@ -128,57 +129,6 @@ export async function individualData(id: number, month: string) {
     `;
     if (data.rows[0] !== undefined) {
       return data.rows[0].month;
-    }
-  } catch(error) {
-    throw error;
-  }
-}
-
-export async function dayData(date: {month: string, day:number}) {
-  try {
-    const data = await sql<{start: string, end: string}>`
-      SELECT element->>'start' AS start, element->>'end' AS end
-      FROM schedule, jsonb_array_elements(days) AS element
-      WHERE month = ${date.month} AND element->>'day' = ${date.day};
-    `;
-    const dayData = data.rows[0];
-    if (data.rows[0] === undefined) {
-      return undefined;
-    } else {
-      const day = `${parseInt(date.month.split("-")[1], 10)}/${date.day}`;
-      const participants:{class: number, name: string[]}[] = [];
-      const comments:{name: string, comment: string}[] = [];
-
-      const data = await sql<{name: string, class: number, status: string, comment: string}>`
-        SELECT name, class, element->>'status' AS status, element->>'comment' AS comment
-        FROM members, jsonb_array_elements(schedule->${date.month}) AS element
-        WHERE element->>'day' = ${date.day};
-      `;
-      for (let i = 0; i < data.rows.length; i++) {
-        const eachData = data.rows[i];
-        if (eachData.status === "0") {
-          let added = false;
-          for (let j = 0; j < participants.length; j++) {
-            if (participants[j].class === eachData.class) {
-              participants[j].name.push(eachData.name.trim());
-              added = true;
-            }
-          }
-          if (!added) {
-            participants.push({class: eachData.class, name: [eachData.name.trim()]});
-          }
-        }
-        if (eachData.comment !== null && eachData.comment !== "") {
-          comments.push({ name: eachData.name.trim(), comment: eachData.comment });
-        }
-      }
-      return {
-        day: day,
-        start: dayData.start,
-        end: dayData.end,
-        participants: participants,
-        comments: comments
-      };
     }
   } catch(error) {
     throw error;

@@ -1,9 +1,10 @@
 import NewcheLogo from "@/ui/newche-logo";
-import { membersName, schedule, dayData } from "@/lib/data";
+import { membersName, schedule } from "@/lib/data";
 import ScheduleStatus from "@/components/schedule-status";
 import { month, day } from "@/lib/server-utils";
 import RecentDetails from "@/components/recent-details";
 import { redirect } from "next/navigation";
+import { recentData } from "@/lib/server-utils";
 
 export default async function Page({params}: {params: {id: number}})
 {
@@ -17,12 +18,13 @@ export default async function Page({params}: {params: {id: number}})
   
   const currStatus = await schedule(params.id, currMonth);
   const nextStatus = await schedule(params.id, nextMonth);
-  const currData = await dayData(currDay);
-  const nextData = await dayData(nextDay);
 
   if (name === undefined || currStatus === undefined) {
     return undefined;
   }
+  
+  const currData = await recentData(currDay, currStatus, nextStatus);
+  const nextData = await recentData(nextDay, currStatus, nextStatus);
   
   let index = -1;
   for (let i = 0; i < currStatus.data.ids.length; i++) {

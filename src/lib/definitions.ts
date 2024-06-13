@@ -16,8 +16,19 @@ export type ScheduleTemplate = {
 export type OverallData = {
   ids: number[],
   names: string[],
+  classes: number[],
   days: string[][],
   status: number[][],
   overallComment: string[][],
   individualComment: string[][]
+}
+
+export type RecentData = {
+  day: string,
+  start: string,
+  end: string,
+  participants: {
+      class: number;
+      name: string[];
+  }[]
 }

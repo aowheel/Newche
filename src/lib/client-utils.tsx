@@ -1,7 +1,5 @@
 "use client";
 
-import { transition3 } from "./server-utils";
-
 export function week(dateString: string) {
   const daysOfWeek = ["日","月","火","水","木","金","土"];
   const date = new Date(dateString);
