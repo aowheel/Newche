@@ -17,7 +17,7 @@ export default function Page()
   const [isLoading, setIsLoading] = useState(false);
   
   return (
-    <>
+    <main>
       <Link href="/"><NewcheLogo /></Link>
       <div className="flex justify-center">
         <div className="flex flex-col bg-black mt-10 px-8 py-20 rounded-xl">
@@ -74,6 +74,6 @@ export default function Page()
           }
         </div>
       </div>
-    </>
+    </main>
   );
 }

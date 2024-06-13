@@ -2,5 +2,5 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
   redirect("/entry");
-	return undefined;
+	return <main></main>;
 }

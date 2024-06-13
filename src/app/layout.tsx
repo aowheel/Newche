@@ -5,7 +5,7 @@ import "@/ui/global.css";
 const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NEWCHE",
+  title: "Newche",
   description: "日程調整アプリ",
 };
 

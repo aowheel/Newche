@@ -12,9 +12,9 @@ export default async function Page({params}: {params:{id: number, month: string}
   }
 
   return (
-    <>
+    <main>
       <NewcheLogo name={name} />
       <IndividualSchedule id={params.id} month={params.month} data={data} />
-    </>
+    </main>
   );
 }

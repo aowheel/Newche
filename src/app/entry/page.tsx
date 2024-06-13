@@ -14,7 +14,7 @@ export default async function Entry() {
   } else {
     const names = await members();
     return (
-      <>
+      <main>
         <NewcheLogo />
         <SelectMember names={ names } />
         <p className="text-gray-400 text-center text-sm">
@@ -22,7 +22,7 @@ export default async function Entry() {
           <Link href="/registration" className="underline text-teal-500">こちら</Link>
           から登録
         </p>
-      </>
+      </main>
     );
   }
 }

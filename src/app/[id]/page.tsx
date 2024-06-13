@@ -20,7 +20,7 @@ export default async function Page({params}: {params: {id: number}})
   const nextStatus = await schedule(params.id, nextMonth);
 
   if (name === undefined || currStatus === undefined) {
-    return undefined;
+    return <main></main>;
   }
   
   const currData = await recentData(currDay, currStatus, nextStatus);
