@@ -6,8 +6,7 @@ const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Newche",
-  description: "日程調整アプリ",
-  metadataBase: new URL('https://newche.vercel.app')
+  description: "日程調整アプリ"
 };
 
 export default function RootLayout({
