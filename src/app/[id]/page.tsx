@@ -47,14 +47,8 @@ export default async function Page({params}: {params: {id: number}})
   return (
     <main>
       <NewcheLogo name={name} />
-      {
-        currData !== undefined &&
-        <RecentDetails data={currData} />
-      }
-      {
-        nextData !== undefined &&
-        <RecentDetails data={nextData} />
-      }
+      <RecentDetails data={currData} />
+      <RecentDetails data={nextData} />
       <ScheduleStatus id={params.id} curr={currStatus} next={nextStatus} />
     </main>
   );

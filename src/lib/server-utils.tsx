@@ -51,42 +51,46 @@ export async function day() {
 
 export async function dataExtraction(
   recentDay: {month: string, day: number},
-  status: {month: string; data: OverallData} | undefined
+  status: {month: string, data: OverallData} | undefined
 ) {
   if (status !== undefined) {
-    let dayIndex = -1;
-    let participantsIndex: number[] = [];
-    for (let i = 0; i < status.data.days.length; i++){
-      if (recentDay.day === parseInt(status.data.days[i][0], 10)) {
-        dayIndex = i;
-      }
-    }
-    if (dayIndex !== -1) {
-      for (let i = 0; i < status.data.status.length; i++) {
-        if (status.data.status[i][dayIndex] === 0) {
-          participantsIndex.push(i);
+    if (recentDay.month === status.month) {
+      let dayIndex = -1;
+      let participantsIndex: number[] = [];
+      for (let i = 0; i < status.data.days.length; i++){
+        if (recentDay.day === parseInt(status.data.days[i][0], 10)) {
+          dayIndex = i;
         }
       }
-      const participants: {class: number, name: string[]}[] = [];
-      for (let i = 0; i < participantsIndex.length; i++) {
-        let classesIndex = -1;
-        for (let j = 0; j < participants.length; j++) {
-          if (participants[j].class === status.data.classes[participantsIndex[i]]) {
-            classesIndex = j;
+      if (dayIndex !== -1) {
+        for (let i = 0; i < status.data.status.length; i++) {
+          if (status.data.status[i][dayIndex] === 0) {
+            participantsIndex.push(i);
           }
         }
-        if (classesIndex !== -1) {
-          participants[classesIndex].name.push(status.data.names[participantsIndex[i]]);
-        } else {
-          participants.push({class: status.data.classes[participantsIndex[i]], name: [status.data.names[participantsIndex[i]]]});
+        const participants: {class: number, name: string[]}[] = [];
+        for (let i = 0; i < participantsIndex.length; i++) {
+          let classesIndex = -1;
+          for (let j = 0; j < participants.length; j++) {
+            if (participants[j].class === status.data.classes[participantsIndex[i]]) {
+              classesIndex = j;
+            }
+          }
+          if (classesIndex !== -1) {
+            participants[classesIndex].name.push(status.data.names[participantsIndex[i]]);
+          } else {
+            participants.push({class: status.data.classes[participantsIndex[i]], name: [status.data.names[participantsIndex[i]]]});
+          }
         }
+        return {
+          day: `${parseInt(recentDay.month.split("-")[1], 10)}/${recentDay.day}`,
+          start: status.data.days[dayIndex][1],
+          end: status.data.days[dayIndex][2],
+          participants: participants
+        };
+      } else {
+        return undefined;
       }
-      return {
-        day: `${parseInt(recentDay.month.split("-")[1], 10)}/${recentDay.day}`,
-        start: status.data.days[dayIndex][1],
-        end: status.data.days[dayIndex][2],
-        participants: participants
-      };
     } else {
       return undefined;
     }
@@ -100,9 +104,9 @@ export async function recentData(
   currStatus: {month: string; data: OverallData},
   nextStatus: {month: string; data: OverallData} | undefined
 ) {
-  const curr = dataExtraction(recentDay, currStatus);
-  const next = dataExtraction(recentDay, nextStatus);
-  if (curr !== undefined) {return curr}
-  else if (next !== undefined) {return next}
-  else {return undefined}
+  let data = await dataExtraction(recentDay, currStatus);
+  if (data === undefined) {
+    data = await dataExtraction(recentDay, nextStatus);
+  }
+  return (data);
 }
