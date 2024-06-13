@@ -8,7 +8,7 @@ export default async function Page({params}: {params:{id: number, month: string}
   const data = await individualData(params.id, params.month);
 
   if (name === undefined || data === undefined) {
-    return undefined;
+    return <main></main>;
   }
 
   return (
