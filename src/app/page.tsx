@@ -1,6 +1,8 @@
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function Home() {
-  redirect("/entry");
-	return <main></main>;
+	return <main>
+    <p>🚧開発中</p>
+    <Link href="/entry">👉 Newche</Link>
+  </main>;
 }
