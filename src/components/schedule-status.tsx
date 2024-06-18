@@ -20,36 +20,41 @@ export default function ScheduleStatus(
 
   if (!curr.exist) {
     return (
-      <input
-        type="button"
-        value="今月の日程を追加"
-        onClick={async () => {
-          setPending(true);
-          await insertMonth(id, curr.month);
-          setPending(false);
-          transition2(id, curr.month);
-        }}
-        className="px-2 mx-4 mt-4 text-xl text-white bg-red-400 rounded"
-        disabled={pending}
-      />
+      <div className="px-4 pt-4">
+        <input
+          type="button"
+          value="今月の日程を追加"
+          onClick={async () => {
+            setPending(true);
+            await insertMonth(id, curr.month);
+            setPending(false);
+            transition2(id, curr.month);
+          }}
+          className="inline-block px-2 text-lg text-white bg-red-400 rounded"
+          disabled={pending}
+        />
+      </div>
+      
     );
   } else {
     if (next !== undefined) {
       if (!next.exist) {
         return (
           <>
-            <input
-              type="button"
-              value="来月の日程を追加"
-              onClick={async () => {
-                setPending(true);
-                await insertMonth(id, next.month);
-                setPending(false);
-                transition2(id, next.month);
-              }}
-              className="px-2 mx-4 mt-4 text-white bg-red-400 rounded"
-              disabled={pending}
-            />
+            <div className="px-4 pt-4">
+              <input
+                type="button"
+                value="来月の日程を追加"
+                onClick={async () => {
+                  setPending(true);
+                  await insertMonth(id, next.month);
+                  setPending(false);
+                  transition2(id, next.month);
+                }}
+                className="inline-block px-2 text-lg text-white bg-red-400 rounded"
+                disabled={pending}
+              />
+            </div>
             <OverallSchedule month={curr.month} data={curr.data} />
             <div className="px-4 pb-4">
               <Link href={`${id}/${curr.month}`} className="inline-block px-2 text-lg text-teal-400 border border-teal-400 rounded">今月の日程を編集</Link>
@@ -59,17 +64,19 @@ export default function ScheduleStatus(
       } else {
         const month = [curr.month, next.month];
         const data = [curr.data, next.data];
-        const button = ["来月の予定を表示", "今月の予定を表示"];
+        const button = ["来月の日程を表示", "今月の日程を表示"];
         return (
           <>
-            <input
-              type="button"
-              value={button[state]}
-              onClick={async () => {
-                setState((state+1)%2);
-              }}
-              className="px-2 mx-4 mt-4 text-white bg-teal-600 rounded"
-            />
+            <div className="px-4 pt-4">
+              <input
+                type="button"
+                value={button[state]}
+                onClick={async () => {
+                  setState((state+1)%2);
+                }}
+                className="inline-block px-2 text-lg text-white bg-teal-600 rounded"
+              />
+            </div>
             <OverallSchedule month={month[state]} data={data[state]} />
             <div className="px-4 pb-4">
               <Link href={`${id}/${curr.month}`} className="inline-block mr-4 px-2 text-lg text-teal-400 border border-teal-400 rounded">今月の日程を編集</Link>

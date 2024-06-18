@@ -90,9 +90,9 @@ export default function IndividualSchedule(
         </table>
       </div>
       <div className="flex justify-between mx-4 mb-4">
-        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(0)}<span>&ensp;参加</span></span>
-        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(1)}<span>&ensp;不参加</span></span>
-        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(2)}<span>&ensp;未定</span></span>
+        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(0)}<span className="px-1">参加</span></span>
+        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(1)}<span className="px-1">不参加</span></span>
+        <span className="flex items-center px-1 bg-gray-100 rounded">{statusSymbol2(2)}<span className="px-1">未定</span></span>
       </div>
       <div className="mb-4 mx-4 p-4 border border-teal-300 rounded">
         <div>
@@ -151,12 +151,22 @@ export default function IndividualSchedule(
           </div>
         }
       </div>
-      {
-        allChecked &&
-        <div className="flex justify-center mb-4">
-          <Link href={`/${id}`} className="px-2 text-teal-400 border border-teal-400 rounded">一覧へ戻る</Link>
-        </div>
-      }
+      <div className="flex justify-center items-center mb-4">
+        {
+          !allChecked &&
+          <>
+            <svg className="animate-spin h-8 w-8 fill-none">
+              <path d="M 16,4 A 12,12 0 0,1 28,16" strokeWidth={3} className="stroke-slate-300" />
+              <path d="M 28,16 A 12,12 0 0,1 16,28 A 12,12 0 0,1 4,16 A 12,12 0 0,1 16,4" strokeWidth={3} className="stroke-slate-300 opacity-75" />
+            </svg>
+            <p className="animate-pulse text-lg text-slate-500">すべて入力してください</p>
+          </>
+        }
+        {
+          allChecked &&
+          <Link href={`/${id}`} className="px-2 text-lg text-teal-400 border border-teal-400 rounded">一覧へ戻る</Link>
+        }
+      </div>
     </>
   );
 }
