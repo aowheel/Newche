@@ -2,6 +2,7 @@
 
 import { transition3 } from "@/lib/server-utils";
 import { Orbitron } from "next/font/google";
+import Link from "next/link";
 const orbitron = Orbitron({
   weight: ["600"],
   subsets: ["latin"]
@@ -13,6 +14,9 @@ export default function NewcheLogo({ name }: {name?: string}) {
       <div className="flex justify-between items-baseline mx-2">
         <div className={`flex-none ${orbitron.className} text-4xl text-teal-500`}>
           Newche
+        </div>
+        <div className="flex-none">
+          <Link href="/" className="text-gray-400 border-dashed border-b-2">🔗情報を見る</Link>
         </div>
         <div className="flex-none">
           <input

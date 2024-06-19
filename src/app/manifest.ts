@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Newche',
     short_name: 'Newche',
     description: '日程調整アプリ',
-    start_url: '/',
+    start_url: '/entry',
     display: 'standalone',
     background_color: '#000000',
     theme_color: '#000000',
