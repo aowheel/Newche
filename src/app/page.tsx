@@ -9,7 +9,7 @@ export default async function Home() {
       <div className="p-4 leading-loose">
         <h1 className="text-xl font-medium py-2">😊アプリとして使えるようになりました</h1>
         <div className="p-2">
-          <p>iOSの場合は共有のボタンから"ホーム画面に追加"でインストールできます。</p>
+          <p>iOSの場合は共有のボタンから&quot;ホーム画面に追加&quot;でインストールできます。</p>
           <Image
             src="/image/iOS.jpg"
             alt="iOSの場合の追加方法"
@@ -17,7 +17,7 @@ export default async function Home() {
             height={0}
             className="border-2"
           />
-          <p>Androidの場合はページ上部の"⁝"のボタンから"ホーム画面に追加"でインストールできます。</p>
+          <p>Androidの場合はページ上部の&quot;⁝&quot;のボタンから&quot;ホーム画面に追加&quot;でインストールできます。</p>
           <Image
             src="/image/Android.png"
             alt="iOSの場合の追加方法"
