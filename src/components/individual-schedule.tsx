@@ -156,10 +156,10 @@ export default function IndividualSchedule(
           !allChecked &&
           <>
             <svg className="animate-spin h-8 w-8 fill-none">
-              <path d="M 16,4 A 12,12 0 0,1 28,16" strokeWidth={3} className="stroke-slate-300" />
-              <path d="M 28,16 A 12,12 0 0,1 16,28 A 12,12 0 0,1 4,16 A 12,12 0 0,1 16,4" strokeWidth={3} className="stroke-slate-300 opacity-75" />
+              <path d="M 16,4 A 12,12 0 0,1 28,16" strokeWidth={3} className="stroke-gray-300" />
+              <path d="M 28,16 A 12,12 0 0,1 16,28 A 12,12 0 0,1 4,16 A 12,12 0 0,1 16,4" strokeWidth={3} className="stroke-gray-300 opacity-75" />
             </svg>
-            <p className="animate-pulse text-lg text-slate-500">すべて入力してください</p>
+            <p className="px-2 animate-pulse text-lg text-gray-500">すべて入力してください</p>
           </>
         }
         {
