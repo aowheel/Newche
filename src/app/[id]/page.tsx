@@ -5,6 +5,7 @@ import { month, day } from "@/lib/server-utils";
 import RecentDetails from "@/components/recent-details";
 import { redirect } from "next/navigation";
 import { recentData } from "@/lib/server-utils";
+import Link from "next/link";
 
 export default async function Page({params}: {params: {id: number}})
 {
@@ -50,6 +51,9 @@ export default async function Page({params}: {params: {id: number}})
       <RecentDetails data={currData} />
       <RecentDetails data={nextData} />
       <ScheduleStatus id={params.id} curr={currStatus} next={nextStatus} />
+      <div className="flex justify-center pb-4">
+        <Link href="/" className="text-gray-400 border-dashed border-b-2 border-gray-400">情報を見る</Link>
+      </div>
     </main>
   );
 }

@@ -16,9 +16,6 @@ export default function NewcheLogo({ name }: {name?: string}) {
           Newche
         </div>
         <div className="flex-none">
-          <Link href="/" className="text-gray-400 border-dashed border-b-2">🔗情報を見る</Link>
-        </div>
-        <div className="flex-none">
           <input
             type="button"
             onClick={async () => {

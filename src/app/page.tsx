@@ -27,6 +27,7 @@ export default async function Home() {
           />
         </div>
         <h1 className="text-xl font-medium py-2">🎈個人の日程は参加、不参加、未定のすべて入力後、全体の表が見れるようになります</h1>
+        <h1 className="text-xl font-medium py-2">🙇‍♂️名前の入力が再度必要になると思いますが、今後は名前の入力はスキップされると思います</h1>
         <h1 className="text-xl font-medium py-2">😎名前を間違えて入ってしまった場合は各ページ右上の名前をタップで変更できます</h1>
       </div>
       <div className="flex justify-center p-4">
