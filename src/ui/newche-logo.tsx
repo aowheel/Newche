@@ -2,7 +2,6 @@
 
 import { transition3 } from "@/lib/server-utils";
 import { Orbitron } from "next/font/google";
-import Link from "next/link";
 const orbitron = Orbitron({
   weight: ["600"],
   subsets: ["latin"]
