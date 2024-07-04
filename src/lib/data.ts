@@ -3,7 +3,6 @@
 import { sql } from "@vercel/postgres";
 import { z } from "zod";
 import { OverallData, Schedule, ScheduleTemplate } from "./definitions";
-import { Rowdies } from "next/font/google";
 
 export async function members() {
   try {
