@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model members {
+  id       Int    @id @default(autoincrement())
+  name     String @db.Char(5)
+  class    Int?
+  schedule Json?
+}
+
+model schedule {
+  id    Int    @id @default(autoincrement())
+  month String @db.Char(7)
+  days  Json?
+}
