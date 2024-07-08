@@ -11,7 +11,7 @@ export default function NewcheLogo({ name }: {name?: string}) {
   if (name !== undefined) {
     return (
       <div className="flex justify-between items-baseline mx-2">
-        <div className={`flex-none ${orbitron.className} text-4xl text-teal-500`}>
+        <div className={`flex-none ${orbitron.className} text-4xl text-teal-400`}>
           Newche
         </div>
         <div className="flex-none">
